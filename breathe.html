@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Breathe With Me – Yogami</title>
+  <style>
+    body {
+      background: linear-gradient(to bottom, #d2f5ec, #ffffff);
+      font-family: 'Segoe UI', sans-serif;
+      text-align: center;
+      padding: 50px;
+      color: #155e54;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+    }
+
+    .breathing-circle {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      margin: 50px auto;
+      background: 
+        radial-gradient(circle, rgba(76, 211, 179, 0.6) 0%, rgba(76, 211, 179, 0.9) 100%),
+        url('breathing.jpg');
+      background-size: cover;
+      background-position: center;
+      box-shadow: 0 0 30px rgba(76, 211, 179, 0.5);
+      animation: breathe 15s ease-in-out infinite;
+    }
+
+    .text {
+      font-size: 1.5rem;
+      font-weight: bold;
+      animation: fadeText 8s ease-in-out infinite;
+    }
+
+    @keyframes breathe {
+      0%   {
+        transform: scale(1);
+        opacity: 0.8;
+        box-shadow: 0 0 30px rgba(76, 211, 179, 0.5);
+      }
+      50%  {
+        transform: scale(1.5);
+        opacity: 1;
+        box-shadow: 0 0 50px rgba(76, 211, 179, 0.9);
+      }
+      100% {
+        transform: scale(1);
+        opacity: 0.8;
+        box-shadow: 0 0 30px rgba(76, 211, 179, 0.5);
+      }
+    }
+
+    @keyframes fadeText {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.6; }
+    }
+
+    footer {
+      margin-top: 60px;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<link rel="stylesheet" href=""
+<body>
+  <h1>Breathe With Me 🌬️</h1>
+  <p class="text">Inhale... Exhale... Repeat</p>
+
+  <!-- Breathing animation with background image -->
+  <div class="breathing-circle"></div>
+
+  <footer>© 2025 Yogami – Yoga for Every Body</footer>
+</body>
+</html>

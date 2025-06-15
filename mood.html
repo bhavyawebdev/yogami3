@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mood Based Yoga – Yogami</title>
+  <link rel="stylesheet" href="mood.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #f5fff9;
+      color: #155e54;
+    }
+    nav a {
+      text-decoration: none;
+      color: #0d4d3c;
+      font-weight: 500;
+      padding: 6px 12px;
+      border-radius: 6px;
+      transition: background 0.2s;
+    }
+
+    nav a:hover {
+      background-color: #c2f0df;
+    }
+
+    .mood-section {
+      padding: 60px 20px 40px;
+      text-align: center;
+    }
+
+    .container h1 {
+      font-size: 2.2rem;
+      margin-bottom: 10px;
+    }
+
+    .container p {
+      font-size: 1.1rem;
+      margin-bottom: 30px;
+    }
+
+    .mood-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .mood-card {
+      background-color: #e6fff7;
+      padding: 15px 30px;
+      border-radius: 12px;
+      font-size: 1.2rem;
+      color: #0d4d3c;
+      text-decoration: none;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      transition: transform 0.2s;
+    }
+
+    .mood-card:hover {
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+
+  
+
+  <section class="mood-section">
+    <div class="container">
+      <h1>🧘‍♀️ Find Yoga Based on Your Mood</h1>
+      <p>Select how you're feeling today:</p>
+      <div class="mood-grid">
+        <a href="stressed.html" class="mood-card">😰 Stressed</a>
+        <a href="tired.html" class="mood-card">😴 Tired</a>
+        <a href="energetic.html" class="mood-card">⚡ Energetic</a>
+        <a href="sad.html" class="mood-card">😢 Sad</a>
+        <a href="happy.html" class="mood-card">😊 Happy</a>
+      </div>
+    </div>
+  </section>
+
+</body>
+</html>

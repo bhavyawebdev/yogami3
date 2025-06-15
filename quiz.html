@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Yoga Quiz – Levels</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #fffde7, #e8f5e9);
+      margin: 0;
+      padding: 2rem;
+      text-align: center;
+    }
+    .container {
+      max-width: 800px;
+      margin: auto;
+      background: white;
+      padding: 2rem;
+      border-radius: 15px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    }
+    .options button {
+      display: block;
+      margin: 0.5rem auto;
+      width: 80%;
+      padding: 0.75rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 8px;
+      background-color: #81c784;
+      color: white;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .options button:hover {
+      background-color: #388e3c;
+    }
+    #feedback {
+      font-weight: bold;
+      font-size: 1.2rem;
+      margin-top: 1rem;
+    }
+    #score, #timer {
+      font-size: 1.1rem;
+      font-weight: bold;
+    }
+    .level-select button, .next-btn, .restart-btn {
+      margin: 1rem 0.5rem;
+      padding: 0.6rem 1.2rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 10px;
+      background-color: #fbc02d;
+      color: #000;
+      cursor: pointer;
+    }
+      
+    .restart-btn {
+      background-color: #1976d2;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🧘 Yoga Quiz</h1>
+    <div class="level-select" id="levelSelect">
+      <p>Select Your Level:</p>
+      <button onclick="startQuiz('beginner')">Beginner</button>
+      <button onclick="startQuiz('intermediate')">Intermediate</button>
+      <button onclick="startQuiz('advanced')">Advanced</button>
+    </div>
+
+    <p id="score"></p>
+    <p id="timer"></p>
+    <div class="options" id="optionsContainer"></div>
+    <p id="feedback"></p>
+    <button class="next-btn" id="nextBtn" onclick="loadNextQuestion()" style="display:none;">Next</button>
+    <button class="restart-btn" id="restartBtn" onclick="location.reload()" style="display:none;">Restart</button>
+  </div>
+
+  <script>
+    const levels = {
+      beginner: Array.from({ length: 20 }, (_, i) => ({
+        correct: `Which of the following is a common yoga term used in Beginner classes?`,
+        options: [
+          `Asana`,
+          `Kundalini`,
+          `Samadhi`,
+          `Chakra`
+        ]
+      })),
+      intermediate: Array.from({ length: 20 }, (_, i) => ({
+        correct: `What is the Sanskrit name for 'Upward Facing Dog'?`,
+        options: [
+          `Urdhva Mukha Svanasana`,
+          `Adho Mukha Svanasana`,
+          `Bhujangasana`,
+          `Dhanurasana`
+        ]
+      })),
+      advanced: Array.from({ length: 20 }, (_, i) => ({
+        correct: `Which advanced posture involves balancing on the head?`,
+        options: [
+          `Sirsasana`,
+          `Bakasana`,
+          `Mayurasana`,
+          `Padmasana`
+        ]
+      }))
+    };
+
+    let current = 0, score = 0, quizData = [], timerId, seconds = 30;
+
+    function startQuiz(level) {
+      quizData = [...levels[level]];
+      shuffle(quizData);
+      score = 0;
+      current = 0;
+      document.getElementById("levelSelect").style.display = "none";
+      loadQuestion(current);
+    }
+
+    function shuffle(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+    }
+
+    function loadQuestion(idx) {
+      if (idx >= quizData.length) return endQuiz();
+      const q = quizData[idx];
+      const oc = document.getElementById("optionsContainer");
+      oc.innerHTML = `<p><strong>${q.correct}</strong></p>`;
+      q.options.forEach(opt => {
+        const btn = document.createElement("button");
+        btn.textContent = opt;
+        btn.onclick = () => checkAnswer(opt, q.options[0]);
+        oc.appendChild(btn);
+      });
+      document.getElementById("feedback").textContent = "";
+      document.getElementById("nextBtn").style.display = "none";
+      updateScore();
+      startTimer();
+    }
+
+    function startTimer() {
+      seconds = 30;
+      updateTimer();
+      clearInterval(timerId);
+      timerId = setInterval(() => {
+        seconds--;
+        updateTimer();
+        if (seconds === 0) {
+          clearInterval(timerId);
+          checkAnswer(null, quizData[current].options[0]);
+        }
+      }, 1000);
+    }
+
+    function updateTimer() {
+      document.getElementById("timer").textContent = `⏳ Time Left: ${seconds}s`;
+    }
+
+    function updateScore() {
+      document.getElementById("score").textContent = `Score: ${score} / ${current}`;
+    }
+
+    function checkAnswer(selected, correct) {
+      clearInterval(timerId);
+      const fb = document.getElementById("feedback");
+      if (selected === correct) {
+        fb.textContent = "✅ Correct!";
+        score++;
+      } else {
+        fb.textContent = selected ? `❌ Wrong… Correct is: ${correct}` : `⏱️ Time's Up! Correct is: ${correct}`;
+      }
+      current++;
+      document.getElementById("nextBtn").style.display = "inline-block";
+      updateScore();
+    }
+
+    function loadNextQuestion() {
+      loadQuestion(current);
+    }
+
+    function endQuiz() {
+      document.getElementById("optionsContainer").innerHTML = "";
+      document.getElementById("feedback").textContent = `🎉 Quiz Completed! Final Score: ${score} / ${quizData.length}`;
+      document.getElementById("nextBtn").style.display = "none";
+      document.getElementById("restartBtn").style.display = "inline-block";
+      document.getElementById("timer").textContent = "";
+    }
+  </script>
+</body>
+</html>

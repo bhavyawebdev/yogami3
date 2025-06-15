@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Yoga Pose Quiz – 20 Questions</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #f0fff0, #e0f7fa);
+      text-align: center;
+      padding: 2rem;
+      margin: 0;
+    }
+    .container {
+      max-width: 600px;
+      margin: auto;
+      background: #fffcee;
+      padding: 2rem;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    }
+    img {
+      width: 100%;
+      max-height: 200px;
+      object-fit: contain;
+      border-radius: 10px;
+      margin: 1rem 0;
+    }
+    .options button {
+      display: block;
+      width: 100%;
+      margin: 0.5rem 0;
+      padding: 0.8rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 8px;
+      background-color: #00796b;
+      color: white;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .options button:hover {
+      background-color: #004d40;
+    }
+    #feedback {
+      font-weight: bold;
+      margin-top: 1rem;
+      font-size: 1.2rem;
+    }
+    #score {
+      font-size: 1.1rem;
+      font-weight: bold;
+    }
+    .next-btn, .restart-btn {
+      margin-top: 1rem;
+      padding: 0.6rem 1.5rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 10px;
+      background-color: #ffa000;
+      color: white;
+      cursor: pointer;
+    }
+    .restart-btn {
+      background-color: #1976d2;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🧘 Yoga Pose Quiz – 20 Qs</h1>
+    <p id="score">Score: 0 / 0</p>
+    <img id="poseImage" src="" alt="Yoga Pose" />
+    <div class="options" id="optionsContainer"></div>
+    <p id="feedback"></p>
+    <button class="next-btn" id="nextBtn" onclick="loadNextQuestion()">Next</button>
+    <button class="restart-btn" id="restartBtn" onclick="restartQuiz()" style="display:none;">Restart Quiz</button>
+  </div>
+
+  <script>
+    const allQuestions = [
+      {
+        image: "tree pose.jpg",
+        correct: "Tree Pose (Vrikshasana)",
+        options: ["Tree Pose (Vrikshasana)","Mountain Pose","Plank Pose","Bridge Pose"]
+      },
+      {
+        image: "lotus pose.png",
+        correct: "Lotus Pose (Padmasana)",
+        options: ["Lotus Pose (Padmasana)","Cobra Pose","Child's Pose","Seated Twist"]
+      },
+      {
+        image: "warriorpose2.jpg",
+        correct: "Warrior II (Virabhadrasana II)",
+        options: ["Warrior II","Warrior I","Triangle Pose","Chair Pose"]
+      },
+      {
+        image: "Adho Mukha Svanasana.jpg",
+        correct: "Downward Dog (Adho Mukha Svanasana)",
+        options: ["Downward Dog","Upward Dog","Camel Pose","Child's Pose"]
+      },
+      {
+        image: "Anjaneyasana.jpg",
+        correct: "Crescent Lunge (Anjaneyasana)",
+        options: ["Crescent Lunge","Tree Pose","Warrior I","Boat Pose"]
+      },
+      {
+        image: "Trikonasana.jpg",
+        correct: "Triangle Pose (Trikonasana)",
+        options: ["Triangle Pose","Warrior II","Chair Pose","Plank Pose"]
+      },
+      {
+        image: "Paschimottanasana2.jpg",
+        correct: "Seated Forward Bend (Paschimottanasana)",
+        options: ["Seated Forward Bend","Lotus Pose","Cobra Pose","Bridge Pose"]
+      },
+      {
+        image: "child pose.png",
+        correct: "Child's Pose (Balasana)",
+        options: ["Child's Pose","Plank","Boat Pose","Downward Dog"]
+      },
+      {
+        image: "bridge pose.jpg",
+        correct: "Bridge Pose (Setu Bandha Sarvangasana)",
+        options: ["Bridge Pose","Upward Dog","Cobra Pose","Triangle Pose"]
+      },
+      {
+        image: "boat pose.jpg",
+        correct: "Boat Pose (Navasana)",
+        options: ["Boat Pose","Plank Pose","Tree Pose","Downward Dog"]
+      },
+      {
+        image: "plank pose.jpg",
+        correct: "Plank Pose (Phalakasana)",
+        options: ["Plank Pose","Chaturanga","Child's Pose","Triangle Pose"]
+      },
+      {
+        image: "camel pose2.jpg",
+        correct: "Camel Pose (Ustrasana)",
+        options: ["Camel Pose","Cow Pose","Cat Pose","Lion Pose"]
+      },
+      {
+        image: "warrior1 pose.jpg",
+        correct: "Warrior I (Virabhadrasana I)",
+        options: ["Warrior I","Warrior II","Triangle Pose","Tree Pose"]
+      },
+      {
+        image: "chair-pose.jpg",
+        correct: "Chair Pose (Utkatasana)",
+        options: ["Chair Pose","Tree Pose","Bridge Pose","Plank Pose"]
+      },
+      {
+        image: "cobra-pose.jpg",
+        correct: "Cobra Pose (Bhujangasana)",
+        options: ["Cobra Pose","Upward Dog","Child's Pose","Downward Dog"]
+      },
+      {
+        image: "Urdhva Mukha Svanasana.jpg",
+        correct: "Upward Facing Dog (Urdhva Mukha Svanasana)",
+        options: ["Upward Dog","Cobra Pose","Downward Dog","Plank Pose"]
+      },
+      {
+        image: "Sirsasana.jpg",
+        correct: "Headstand (Sirsasana)",
+        options: ["Headstand","Tree Pose","Bridge Pose","Chair Pose"]
+      },
+      {
+        image: "Bakasana.jpg",
+        correct: "Crow Pose (Bakasana)",
+        options: ["Crow Pose","Plank Pose","Boat Pose","Triangle Pose"]
+      },
+      {
+        image: "Matsyasana.jpg",
+        correct: "Fish Pose (Matsyasana)",
+        options: ["Fish Pose","Camel Pose","Cobra Pose","Child's Pose"]
+      },
+      {
+        image: "Salamba Sarvangasana.jpg",
+        correct: "Shoulder Stand (Salamba Sarvangasana)",
+        options: ["Shoulder Stand","Plow Pose","Headstand","Bridge Pose"]
+      }
+    ];
+
+    let quizData = [];
+    let current = 0;
+    let score = 0;
+
+    function shuffle(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+    }
+
+    function restartQuiz() {
+      score = 0;
+      current = 0;
+      quizData = [...allQuestions];
+      shuffle(quizData);
+      document.getElementById("restartBtn").style.display = "none";
+      loadQuestion(current);
+    }
+
+    function updateScore() {
+      document.getElementById("score").textContent = `Score: ${score} / ${current}`;
+    }
+
+    function loadQuestion(idx) {
+      const q = quizData[idx];
+      document.getElementById("poseImage").src = q.image;
+      const oc = document.getElementById("optionsContainer");
+      oc.innerHTML = "";
+      q.options.forEach(opt => {
+        const btn = document.createElement("button");
+        btn.textContent = opt;
+        btn.onclick = () => checkAnswer(opt, q.correct);
+        oc.appendChild(btn);
+      });
+      document.getElementById("feedback").textContent = "";
+      document.getElementById("nextBtn").style.display = "none";
+      updateScore();
+    }
+
+    function checkAnswer(selected, correct) {
+      document.getElementById("feedback").textContent = selected === correct ?
+        "✅ Correct!" :
+        `❌ Wrong… Correct is: ${correct}`;
+      if (selected === correct) score++;
+      current++;
+      updateScore();
+      document.getElementById("nextBtn").style.display = "inline-block";
+    }
+
+    function loadNextQuestion() {
+      if (current < quizData.length) {
+        loadQuestion(current);
+      } else {
+        document.getElementById("poseImage").style.display = "none";
+        document.getElementById("optionsContainer").innerHTML = "";
+        document.getElementById("feedback").textContent = `✨ Quiz Completed! Final Score: ${score} / ${quizData.length}`;
+        document.getElementById("restartBtn").style.display = "inline-block";
+        document.getElementById("nextBtn").style.display = "none";
+      }
+    }
+
+    // Start the quiz on page load
+    restartQuiz();
+  </script>
+</body>
+</html>
