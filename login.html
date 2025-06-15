@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Yogami Login</title>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Quicksand', sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: url('https://images.unsplash.com/photo-1552196563-55cd4e45efb3?auto=format&fit=crop&w=1920&q=80') no-repeat center center fixed;
+      background-size: cover;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    .login-container {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(15px);
+      border-radius: 16px;
+      padding: 40px 30px;
+      max-width: 400px;
+      width: 100%;
+      text-align: center;
+      color: #ffffff;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    }
+    .login-container h1{
+        color: yellow;
+        
+    }
+
+    .login-container h2 {
+      margin-bottom: 10px;
+      font-size: 2rem;
+      font-weight: 600;
+    }
+
+    .login-container p {
+      font-size: 1rem;
+      margin-bottom: 30px;
+      color: #f0f0f0;
+    }
+
+    .login-container input {
+      width: 100%;
+      padding: 12px 15px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+
+    .login-container button {
+      width: 100%;
+      padding: 12px;
+      background-color: #4CAF50;
+      color: white;
+      font-size: 1rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 15px;
+      transition: background 0.3s;
+    }
+
+    .login-container button:hover {
+      background-color: #43a047;
+      text-decoration: #43a047;
+    }
+
+    .login-container .links {
+      margin-top: 20px;
+      font-size: 0.9rem;
+    }
+
+    .login-container .links a {
+      color: #e0e0e0;
+      text-decoration: none;
+      margin: 0 10px;
+    }
+
+    .login-container .links a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 500px) {
+      .login-container {
+        padding: 30px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <h1>Signup-form</h1>
+    <h2>Welcome Back</h2>
+    <p>Be Yourself, Better. Start with <strong>Yogami</strong>.</p>
+    <form action="#">
+      <input type="email" placeholder="Email" required />
+      <input type="password" placeholder="Password" required />
+      <button type="submit"><a href="yogami.html">Log In</a></button>
+    </form>
+    <div class="links">
+      <a href="#">Forgot Password?</a> |
+      <a href="index.html">Create Account</a>
+      
+    </div>
+  </div>
+</body>
+</html>

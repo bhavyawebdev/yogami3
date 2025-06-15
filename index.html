@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- SEO Meta Tags -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="title" content="Create Account – Yogami" />
+  <meta name="description" content="Join Yogami and begin your yoga transformation. Create your free account now and access personalized programs, breathing sessions, and mindful yoga flows." />
+  <meta name="keywords" content="Yoga signup, Yogami registration, create account, yoga classes, yoga app sign up" />
+  <meta name="author" content="Yogami" />
+
+  <title>Create Account – Yogami</title>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Quicksand', sans-serif;
+    }
+
+    body {
+      background-image: url('yogalo.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.4);
+      z-index: 1;
+    }
+
+    .form-box {
+      position: relative;
+      z-index: 2;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(15px);
+      padding: 40px 30px;
+      border-radius: 16px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+      width: 100%;
+      max-width: 420px;
+      color: #fff;
+      text-align: center;
+    }
+
+    .form-box h2 {
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+
+    .form-box p {
+      font-size: 1rem;
+      margin-bottom: 25px;
+      color: #f0f0f0;
+    }
+
+    .form-box input {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      background: rgba(255, 255, 255, 0.2);
+      color: #fff;
+    }
+
+    .form-box input::placeholder {
+      color: #eee;
+    }
+
+    .form-box button {
+      width: 100%;
+      padding: 12px;
+      background: #4CAF50;
+      border: none;
+      border-radius: 10px;
+      color: white;
+      font-size: 1rem;
+      margin-top: 10px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .form-box button:hover {
+      background-color: #388e3c;
+      text-decoration-color: #e0e0e0;
+    }
+
+    .form-box .links {
+      margin-top: 20px;
+      font-size: 0.9rem;
+    }
+
+    .form-box .links a {
+      color: #e0e0e0;
+      text-decoration: none;
+    }
+
+    .form-box .links a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 500px) {
+      .form-box {
+        padding: 30px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="form-box">
+    <h2>Join Yogami</h2>
+    <p>Be yourself, better. 🌿 Begin your mindful journey today.</p>
+    <form action="#" method="POST">
+      <input type="text" name="fullname" placeholder="Full Name" required />
+      <input type="email" name="email" placeholder="Email Address" required />
+      <input type="text" name="username" placeholder="Choose a Username" required />
+      <input type="password" name="password" placeholder="Create Password" required />
+      <input type="password" name="confirm" placeholder="Confirm Password" required />
+      <button type="submit"><a href="yogami.html">Create Account</a></button>
+    </form>
+    <div class="links">
+      Already have an account? <a href="login.html">Login Here</a>
+    </div>
+  </div>
+</body>
+</html>
